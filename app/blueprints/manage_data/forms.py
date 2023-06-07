@@ -38,15 +38,15 @@ class BIANewEditFormMixin():
 
 class BIANewForm(FlaskForm, BIANewEditFormMixin):
 
-    submit = SubmitField('Add')
+    submit = SubmitField('Add', render_kw={'class': 'mt-2'})
 
 class BIAEditForm(FlaskForm, BIANewEditFormMixin):
 
-    submit = SubmitField('Update')
+    submit = SubmitField('Update', render_kw={'class': 'mt-2'})
 
 class BIADeleteForm(FlaskForm):
 
-    submit = SubmitField('Confirm delete')
+    submit = SubmitField('Confirm delete', render_kw={'class': 'mt-2'})
 
 # Components
 class CompNewEditFormMixin():
@@ -63,15 +63,15 @@ class CompNewEditFormMixin():
     description = StringField('Describe the component', validators=[InputRequired()])
 
 class CompNewForm(FlaskForm, CompNewEditFormMixin):
-    submit = SubmitField('Add')
+    submit = SubmitField('Add', render_kw={'class': 'mt-2'})
 
 class CompEditForm(FlaskForm, CompNewEditFormMixin):
 
-    submit = SubmitField('Update')
+    submit = SubmitField('Update', render_kw={'class': 'mt-2'})
 
 class CompDeleteForm(FlaskForm):
 
-    submit = SubmitField('Confirm delete')
+    submit = SubmitField('Confirm delete', render_kw={'class': 'mt-2'})
 
 
 # References
@@ -83,15 +83,15 @@ class ReferenceNewEditFormMixin():
     consequence_huge = StringField('What does the huge consequence entail? ', validators=[InputRequired()])
 
 class ReferenceNewForm(FlaskForm, ReferenceNewEditFormMixin):
-    submit = SubmitField('Add')
+    submit = SubmitField('Add', render_kw={'class': 'mt-2'})
 
 class ReferenceEditForm(FlaskForm, ReferenceNewEditFormMixin):
 
-    submit = SubmitField('Update')
+    submit = SubmitField('Update', render_kw={'class': 'mt-2'})
 
 class ReferenceDeleteForm(FlaskForm):
 
-    submit = SubmitField('Confirm delete')
+    submit = SubmitField('Confirm delete', render_kw={'class': 'mt-2'})
 
 # Consequences
 class ConsequenceNewEditFormMixin():
@@ -101,18 +101,19 @@ class ConsequenceNewEditFormMixin():
                            allow_blank=False,
                            blank_text='Select the Component',
                            render_kw={'size': 1})
-    category = QuerySelectField('Consequence Category',
-                           get_label='consequence_category',
-                           query_factory=lambda: app_db.session.query(References).order_by(References.consequence_category).all(),
-                           allow_blank=False,
-                           blank_text='Select the category',
-                           render_kw={'size': 1})
     security_property = QuerySelectField('Where does the consequence interfere with',
                            get_label='choice',
                            query_factory=lambda: app_db.session.query(SecurityProperties).order_by(SecurityProperties.id).all(),
                            allow_blank=False,
                            blank_text='Select the property',
                            render_kw={'size': 1})
+    category = QuerySelectField('Consequence Category',
+                           get_label='consequence_category',
+                           query_factory=lambda: app_db.session.query(References).order_by(References.consequence_category).all(),
+                           allow_blank=False,
+                           blank_text='Select the category',
+                           render_kw={'size': 1})
+
     consequence_worstcase = QuerySelectField('Worstcase consequence',
                            get_label='choice',
                            query_factory=lambda: app_db.session.query(ConsequenceChoices).order_by(ConsequenceChoices.id).all(),
@@ -130,10 +131,10 @@ class ConsequenceNewEditFormMixin():
     justification_realisticcase = StringField('Justification for realistic consequence')
 
 class ConsequenceNewForm(FlaskForm, ConsequenceNewEditFormMixin):
-    submit = SubmitField('Add')
+    submit = SubmitField('Add', render_kw={'class': 'mt-2'})
 
 class ConsequenceEditForm(FlaskForm, ConsequenceNewEditFormMixin):
-    submit = SubmitField('Update')
+    submit = SubmitField('Update', render_kw={'class': 'mt-2'})
 
 
 class ConsequenceDeleteForm(FlaskForm):
@@ -153,12 +154,12 @@ class AvailabilityNewEditFormMixin():
     masl = StringField('What is the MASL ', validators=[InputRequired()])
 
 class AvailabilityNewForm(FlaskForm, AvailabilityNewEditFormMixin):
-    submit = SubmitField('Add')
+    submit = SubmitField('Add', render_kw={'class': 'mt-2'})
 
 class AvailabilityEditForm(FlaskForm, AvailabilityNewEditFormMixin):
 
-    submit = SubmitField('Update')
+    submit = SubmitField('Update', render_kw={'class': 'mt-5'})
 
 class AvailabilityDeleteForm(FlaskForm):
 
-    submit = SubmitField('Confirm delete')
+    submit = SubmitField('Confirm delete', render_kw={'class': 'mt-2'})
